@@ -35,6 +35,7 @@ const App = () => {
       } else {
         console.log("No authorized account found")
       }
+      getAllLinks();
     } catch (error) {
       console.log(error);
     }
@@ -138,15 +139,10 @@ const App = () => {
     }
 }
 
-  /*
-  * This runs our function when the page loads.
-  */
-  useEffect(() => {
-    checkIfWalletIsConnected();
-    getAllLinks();
-  }, [])
 
   useEffect(() => {
+    checkIfWalletIsConnected();
+
     let linkHubContract;
   
     const onNewLink = (from, timestamp, url) => {
@@ -174,6 +170,7 @@ const App = () => {
         linkHubContract.off("NewLink", onNewLink);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
